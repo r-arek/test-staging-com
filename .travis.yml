@@ -4,3 +4,5 @@ os: linux
 
 script:
   - for i in {1..60}; do echo "TEST"; sleep 1; done
+  
+  
