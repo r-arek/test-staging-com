@@ -1,8 +1,6 @@
-arch:
-  - amd64
 os: linux
+dist: bionic
+group: dev
 
 script:
-  - for i in {1..60}; do echo "TEST"; sleep 1; done
-  
-  
+  - systemctl status mongodb
