@@ -1,6 +1,6 @@
 os: linux
-dist: bionic
-group: dev
-
+dist: focal
+services:
+  - mongodb 
 script:
   - systemctl status mongodb
