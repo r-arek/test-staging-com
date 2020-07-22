@@ -1,9 +1,7 @@
-jobs:
-  include:
-  - name: focal-amd64
-    dist: focal
-    os: linux
-    group: dev
-    lang: perl
+name: focal-amd64
+dist: focal
+os: linux
+group: dev
+lang: perl
 script:
   - return 0
