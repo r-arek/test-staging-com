@@ -1,20 +1,29 @@
-os: linux
-dist: bionic
-
+language: perl
 jobs:
   include:
-    
-    - services: 
-      - elasticsearch
-      script:
-      - systemctl status elasticsearch
-      - sleep 5
-      - curl 127.0.0.1:9200
- 
-    - services: 
-      - elasticsearch
-      script:
-      - systemctl status elasticsearch
-      - sleep 4
-      - curl 127.0.0.1:9200
-      
+  - name: focal-arm64-graviton2
+    dist: focal
+    arch: arm64-graviton2
+    os: linux
+    group: edge
+    virt: lxd
+    perl: "5.30"
+  - name: focal-amd64
+    dist: focal
+    arch: amd64
+    os: linux
+    perl: "5.30"
+  - name: focal-arm64-graviton2
+    dist: focal
+    arch: arm64-graviton2
+    os: linux
+    group: edge
+    virt: lxd
+    perl: "5.29"
+  - name: focal-amd64
+    dist: focal
+    arch: amd64
+    os: linux
+    perl: "5.29"
+script:
+  - return 0
