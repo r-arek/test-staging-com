@@ -1,4 +1,3 @@
-language: perl
 jobs:
   include:
   - name: focal-amd64
