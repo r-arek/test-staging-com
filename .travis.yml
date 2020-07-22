@@ -1,6 +1,31 @@
-os: linux
-dist: focal
-services:
-  - mongodb 
+language: perl
+
+
+jobs:
+  include:
+  - name: focal-arm64-graviton2
+    dist: focal
+    arch: arm64-graviton2
+    os: linux
+    group: edge
+    virt: lxd
+    perl: "5.30"
+  - name: focal-amd64
+    dist: focal
+    arch: amd64
+    os: linux
+    perl: "5.30"
+  - name: focal-arm64-graviton2
+    dist: focal
+    arch: arm64-graviton2
+    os: linux
+    group: edge
+    virt: lxd
+    perl: "5.29"
+  - name: focal-amd64
+    dist: focal
+    arch: amd64
+    os: linux
+    perl: "5.29"
 script:
-  - sudo systemctl status mongod
+  - return 0
