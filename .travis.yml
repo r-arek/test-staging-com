@@ -26,6 +26,49 @@ jobs:
       arch: amd64
       os: linux
       perl: "5.29"
-      
+env:
+  global:
+    - ARGS=''
+install:
+  - if [[ $TRAVIS_OS_NAME = 'osx' ]]; then sudo chown -R $USER $HOME/perl5/; fi
+  - \curl -L http://install.perlbrew.pl | bash
+  - export PATH=$HOME/perl5/perlbrew/bin:$PATH
+
+before_script:
+  - export LSB_RELEASE=$(lsb_release -rs 2>/dev/null || sw_vers -productVersion | sed 's/^\([0-9][0-9]*.[0-9][0-9]*\).*/\1/')
+  - export OS_NAME=${OS_NAME:-$((lsb_release -is 2>/dev/null || echo "osx") | tr "A-Z" "a-z")}
+  - export ARCH=$(uname -m)
+
 script:
-  - return 0
+  - if [[ $TRAVIS_OS_NAME = 'osx' ]]; then source $HOME/perl5/perlbrew/etc/bashrc; fi
+  - perlbrew install-cpanm --force
+  - (perlbrew list | grep $VERSION) && (yes | perlbrew uninstall $VERSION) || true
+  - perlbrew install perl-$VERSION --as $VERSION $ARGS --notest
+  - |
+    if [[ x$ALIAS != x ]]; then
+      for alias in $ALIAS; do
+        (yes | perlbrew uninstall $ALIAS) || true; perlbrew alias -f create $VERSION $ALIAS || true
+        perlbrew list
+        TAR_PATHS='$HOME/perl5/perlbrew/perls/$alias'
+        TAR_PATHS="$TAR_PATHS $HOME/perl5/perlbrew/perls/$alias"
+        if [[ -z "${MODULES}" ]]; then export MODULES='ExtUtils::MakeMaker Dist::Zilla Moose Test::Pod Test::Pod::Coverage Test::Exception Dist::Zilla::Plugin::Bootstrap::lib LWP Module::Install Test::Most'; fi
+        for module in $MODULES; do perlbrew use $VERSION && cpanm $module --force --notest; done
+      done
+    else
+      perlbrew list
+    fi
+  - if [[ -z "${MODULES}" ]]; then export MODULES='ExtUtils::MakeMaker Dist::Zilla Moose Test::Pod Test::Pod::Coverage Test::Exception Dist::Zilla::Plugin::Bootstrap::lib LWP Module::Install Test::Most'; fi
+  - for module in $MODULES; do perlbrew use $VERSION && cpanm $module --force --notest; done
+
+after_success:
+  - mkdir -p $TRAVIS_BUILD_DIR/$LSB_RELEASE/
+  - tar cjf $TRAVIS_BUILD_DIR/$LSB_RELEASE/perl-${NAME:-${VERSION}}.tar.bz2 $HOME/perl5/perlbrew/perls/$VERSION $HOME/perl5/perlbrew/bin
+  - if [[ x$ALIAS != x ]]; then tar cjf $TRAVIS_BUILD_DIR/$LSB_RELEASE/perl-${ALIAS}.tar.bz2 $HOME/perl5/perlbrew/perls/$VERSION $HOME/perl5/perlbrew/perls/$ALIAS $HOME/perl5/perlbrew/bin; fi
+  - ls -l $TRAVIS_BUILD_DIR/$LSB_RELEASE
+
+addons:
+  artifacts:
+    paths:
+    - $LSB_RELEASE/
+    target_paths:
+    - /binaries/$OS_NAME/$LSB_RELEASE/$ARCH
