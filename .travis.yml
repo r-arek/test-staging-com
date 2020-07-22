@@ -4,5 +4,6 @@ jobs:
     dist: focal
     os: linux
     group: dev
+    lang: perl
 script:
   - return 0
