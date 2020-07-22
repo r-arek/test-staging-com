@@ -1,9 +1,20 @@
-
-dist: bionic
-arch: arm64-graviton2
 os: linux
-group: edge
-virt: lxd
+dist: bionic
 
-script:
-  - return 0
+jobs:
+  include:
+    
+    - services: 
+      - elasticsearch
+      script:
+      - systemctl status elasticsearch
+      - sleep 5
+      - curl 127.0.0.1:9200
+ 
+    - services: 
+      - elasticsearch
+      script:
+      - systemctl status elasticsearch
+      - sleep 4
+      - curl 127.0.0.1:9200
+      
