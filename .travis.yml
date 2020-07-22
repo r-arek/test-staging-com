@@ -3,5 +3,6 @@ jobs:
   - name: focal-amd64
     dist: focal
     os: linux
+    group: dev
 script:
   - return 0
