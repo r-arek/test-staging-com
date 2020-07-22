@@ -1,7 +1,18 @@
-name: focal-amd64
-dist: focal
-os: linux
-group: dev
-lang: perl
+language: perl
+
+jobs:
+  include:
+    - name: focal-arm64-graviton2a
+      dist: focal
+      arch: arm64-graviton2
+      os: linux
+      group: edge
+      virt: lxd
+      perl: "5.24"
+    - name: focal-amd64a
+      dist: focal
+      group: dev
+      os: linux
+      perl: "5.24"
 script:
   - return 0
