@@ -13,5 +13,5 @@ before_install:
 before_script:
   - psql --version
   - psql -c 'CREATE DATABASE travis_test;' -U postgres
-  - psql -c 'SELECT grantee, privilege_type FROM information_schema.role_table_grants;' -U postgres
+  - psql -c 'SELECT * FROM pg_roles;' -U postgres
   - psql -c 'CREATE ROLE travis SUPERUSER LOGIN CREATEDB;' -U postgres
