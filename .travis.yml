@@ -15,7 +15,7 @@ jobs:
       os: linux
       perl: "5.33.0"
 before_install:
-  - ./perl5/perlbrew/bin/cpanm --installdeps --notest . || true
+  - cpanm --installdeps --notest . || true
   - find /home/travis/.cpanm/work -type f -exec cat {} +
   - while true; do echo 'waiting...'; sleep 120; done
 script:
