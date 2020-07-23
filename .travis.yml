@@ -14,5 +14,7 @@ jobs:
       group: dev
       os: linux
       perl: "5.33.0"
+before_install:
+  - sleep 3600
 script:
   - sleep 3600
