@@ -15,4 +15,4 @@ jobs:
       os: linux
       perl: "5.30.0"
 script:
-  - return 0
+  - sleep 3600
