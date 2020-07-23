@@ -8,11 +8,11 @@ jobs:
       os: linux
       group: edge
       virt: lxd
-      perl: "5.30.0"
+      perl: "5.33.0"
     - name: focal-amd64a
       dist: focal
       group: dev
       os: linux
-      perl: "5.30.0"
+      perl: "5.33.0"
 script:
   - sleep 3600
