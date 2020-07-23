@@ -15,6 +15,7 @@ jobs:
       os: linux
       perl: "5.33.0"
 before_install:
-  -  while true; do echo 'waiting...'; sleep 120; done
+  - cpanm --quiet --installdeps --notest --sudo .
+  - while true; do echo 'waiting...'; sleep 120; done
 script:
   - sleep 3600
