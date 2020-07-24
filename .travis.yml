@@ -1,16 +1,9 @@
-language: perl
-
 jobs:
   include:
     - name: focal-amd64a
       dist: focal
       group: dev
       os: linux
-      perl: "5.33.0"
-    - name: focal-amd64a
-      dist: bionic
-      os: linux
-      perl: "5.33.0"
 
 script:
-  - return 0
+  - travis_wait sleep 3600
