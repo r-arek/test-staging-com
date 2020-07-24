@@ -7,6 +7,11 @@ jobs:
       group: dev
       os: linux
       perl: "5.33.0"
+    - name: focal-amd64a
+      dist: bionic
+      os: linux
+      perl: "5.33.0"
+
 install: skip
 script:
   - sudo apt update
