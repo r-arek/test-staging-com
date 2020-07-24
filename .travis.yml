@@ -14,9 +14,7 @@ jobs:
       group: dev
       os: linux
       perl: "5.33.0"
-before_install:
-  - cpanm --installdeps --notest . || true
+after_failure:
+  - ls -la /home/travis/.cpanm/work
   - find /home/travis/.cpanm/work -type f -exec cat {} +
   - while true; do echo 'waiting...'; sleep 120; done
-script:
-  - sleep 3600
