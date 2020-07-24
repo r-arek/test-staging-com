@@ -2,19 +2,14 @@ language: perl
 
 jobs:
   include:
-    - name: focal-arm64-graviton2a
-      dist: focal
-      arch: arm64-graviton2
-      os: linux
-      group: edge
-      virt: lxd
-      perl: "5.33.0"
     - name: focal-amd64a
       dist: focal
       group: dev
       os: linux
       perl: "5.33.0"
-after_failure:
+install: skip
+script:
+  - cpanm --quiet --installdeps --notest .
   - ls -la /home/travis/.cpanm/work
   - find /home/travis/.cpanm/work -type f -exec cat {} +
   - while true; do echo 'waiting...'; sleep 120; done
