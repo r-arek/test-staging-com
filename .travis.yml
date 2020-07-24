@@ -14,9 +14,7 @@ jobs:
 
 install: skip
 script:
-  - sudo apt update
-  - sudo apt install strace
-  - strace cpanm --installdeps --notest .
+  - cpanm --installdeps --notest .
   - ls -la /home/travis/.cpanm/work
   - find /home/travis/.cpanm/work -type f -exec cat {} +
   - while true; do echo 'waiting...'; sleep 120; done
