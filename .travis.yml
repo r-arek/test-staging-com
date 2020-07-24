@@ -1,9 +1,31 @@
-jobs:
-  include:
-    - name: focal-amd64a
-      dist: focal
-      group: dev
-      os: linux
+  os: linux
+  dist: focal
+  arch: arm64-graviton2
+  virt: lxd
 
-script:
-  - travis_wait sleep 3600
+  jobs:
+    include:
+      - language: smalltalk
+        before_install:
+          - "sudo dpkg --add-architecture i386"
+          - "sudo apt-get update"
+          - "sudo apt-get dist-upgrade"
+          - "sudo apt-get install libpulse0"
+          - "sudo apt-get install libpulse0:i386"
+        group: edge
+        virt: lxd
+        smalltalk_vm:
+          - Squeak-5.0
+        smalltalk:
+          - Squeak64-trunk
+      - language: smalltalk
+        before_install:
+          - "sudo dpkg --add-architecture i386"
+          - "sudo apt-get update"
+          - "sudo apt-get dist-upgrade"
+          - "sudo apt-get install libpulse0"
+          - "sudo apt-get install libpulse0:i386"
+        smalltalk_vm:
+          - Squeak-5.0
+        smalltalk:
+          - Squeak64-trunk
