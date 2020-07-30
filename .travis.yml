@@ -3,7 +3,8 @@ dist: focal
 group: edge
 virt: vm
 arch: arm64-graviton2
+language: python
 
 script:
-  - return 0
+  - python --version
       
