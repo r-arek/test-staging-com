@@ -5,5 +5,4 @@ virt: vm
 arch: arm64-graviton2
 
 script:
-  - python --version
-      
+  - uname -a
