@@ -3,6 +3,8 @@ dist: focal
 group: edge
 virt: vm
 arch: arm64-graviton2
+language: python
 
 script:
   - uname -a
+  - python --version
