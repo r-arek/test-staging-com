@@ -1,10 +1,7 @@
 os: linux
 dist: focal
-group: edge
-virt: vm
-arch: arm64-graviton2
-language: python
+group: dev
+virt: lxd
 
 script:
-  - uname -a
-  - python --version
+  - systemd-detect-virt
