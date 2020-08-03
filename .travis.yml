@@ -1,7 +1,8 @@
 os: linux
 dist: focal
-group: dev
+group: edge
 virt: lxd
+arch: arm64-graviton2
 
 script:
-  - systemd-detect-virt
+  - return 0
