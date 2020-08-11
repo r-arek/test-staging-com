@@ -5,5 +5,8 @@ virt: vm
 arch: arm64-graviton2
 
 script:
-  - systemd-detect-virt
+  - wget https://bintray.com/ookla/download/download_file?file_path=ookla-speedtest-1.0.0-aarch64-linux.tgz
+  - tar -xvf ookla-speedtest-1.0.0-aarch64-linux.tgz
+  - cd ookla-speedtest-1.0.0-aarch64-linux
+  - ./speedtest
 
