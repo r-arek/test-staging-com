@@ -5,5 +5,5 @@ virt: vm
 arch: arm64-graviton2
 
 script:
-  - return 0
+  - systemd-detect-virt
 
