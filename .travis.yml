@@ -1,6 +1,7 @@
+os: linux
 dist: focal
 group: edge
+virt: lxd
 arch: arm64-graviton2
-vm: lxd
 script:
-  - uname -a
+  - return 0
