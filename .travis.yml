@@ -1,23 +1,17 @@
-os: linux
-jobs:
-  include:
-     - dist: xenial
-       language: perl
-       
-     - dist: xenial
-       language: erlang
-       
-     - dist: xenial
-       language: python
-              
-     - dist: bionic
-       language: perl
-       
-     - dist: bionic 
-       language: erlang
-       
-     - dist: bionic
-       language: python
-       
+os:
+  - linux
+  - windows
+language: node_js
+node_js:
+  - 8
+  - 10
+  - 11
+  - 12
+  - 13
+matrix:
+  fast_finish: true
+  allow_failures:
+    - node_js: 13
+notifications:
 script:
- - return 0
+  - echo "test "
