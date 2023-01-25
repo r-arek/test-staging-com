@@ -1,13 +1,2 @@
 os: linux
-jobs:
-  include:
-    - script: return 1
-    - script: return 2
-    - script: return 3
-    - script: return 4
-    - script: return 5
-    - script: return 6
-    - script: return 7
-    - script: return 8
-    - script: return 9
-    - script: return 10
+script: date
